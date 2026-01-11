@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Connect_4
 {
@@ -21,6 +22,8 @@ namespace Connect_4
         private Button[] columnButtons = new Button[COLS];
 
 
+
+
         public gameForm()
         {
             InitializeComponent();
@@ -29,7 +32,7 @@ namespace Connect_4
 
         private void gameForm_Load(object sender, EventArgs e)
         {
-            //hallo
+           
         }
         private void InitializeBoard()
         {
@@ -57,6 +60,7 @@ namespace Connect_4
 
         private void ColumnButton_Click(object sender, EventArgs e)
         {
+            coinSound.Play();
             Button btn = sender as Button;
             int col = (int)btn.Tag;
 
