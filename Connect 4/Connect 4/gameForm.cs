@@ -23,6 +23,10 @@ namespace Connect_4
 
         private int[,] board = new int[ROWS, COLS];
         private Button[] columnButtons = new Button[COLS];
+        
+        private bool aiThinking = false;
+        private int gameId = 0; 
+
 
         SoundPlayer calculatorSound = new SoundPlayer(@"Sounds\calculator_sound.wav");
         SoundPlayer playerSound = new SoundPlayer(@"Sounds\player_sound.wav");
@@ -74,6 +78,8 @@ namespace Connect_4
 
         private async void ColumnButton_Click(object sender, EventArgs e)
         {
+            if (gameOver || aiThinking) return;
+
             Button btn = sender as Button;
             int col = (int)btn.Tag;
 
@@ -98,13 +104,27 @@ namespace Connect_4
                 return;
             }
 
+            aiThinking = true;
+            SetButtonsEnabled(false);
+            int currentGameId = gameId;
+
             int bestCol = mm.GetBestMove(board);
             Random rnd = new Random();
             int delay = rnd.Next(500, 1500);
             await Task.Delay(delay);
+
+            if (currentGameId != gameId)
+            {
+                aiThinking = false;
+                return;
+            }
+
+
             mm.MakeMove(bestCol, 2, board); // 2 = AI
             calculatorSound.Play();
             DrawBoard();
+            aiThinking = false;
+            SetButtonsEnabled(true);
 
             if (mm.CheckWin(2, board))
             {
@@ -154,16 +174,25 @@ namespace Connect_4
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
+            gameId++;
             gameOver = false;
+            SetButtonsEnabled(true);
             board = new int[ROWS, COLS];
             DrawBoard();
         }
 
         private void btnMenu_Click(object sender, EventArgs e)
         {
+            gameId++;
             this.Hide();
             mainMenuForm menu = new mainMenuForm();
             menu.Show();
         }
+        private void SetButtonsEnabled(bool enabled)
+        {
+            foreach (var btn in columnButtons)
+                btn.Enabled = enabled;
+        }
+
     }
 }

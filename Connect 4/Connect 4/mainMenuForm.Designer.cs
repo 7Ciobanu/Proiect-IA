@@ -32,6 +32,7 @@
             btnStart = new Button();
             btnSettings = new Button();
             btnExit = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // btnStart
@@ -55,10 +56,16 @@
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += btnExit_Click;
             // 
+            // label1
+            // 
+            resources.ApplyResources(label1, "label1");
+            label1.Name = "label1";
+            // 
             // mainMenuForm
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label1);
             Controls.Add(btnExit);
             Controls.Add(btnSettings);
             Controls.Add(btnStart);
@@ -66,6 +73,7 @@
             Name = "mainMenuForm";
             Load += Form1_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -73,5 +81,6 @@
         private Button btnStart;
         private Button btnSettings;
         private Button btnExit;
+        private Label label1;
     }
 }

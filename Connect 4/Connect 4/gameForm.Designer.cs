@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(gameForm));
             btnMenu = new Button();
             btnRestart = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // btnMenu
@@ -52,11 +54,23 @@
             btnRestart.UseVisualStyleBackColor = true;
             btnRestart.Click += btnRestart_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Image = (Image)resources.GetObject("label1.Image");
+            label1.ImeMode = ImeMode.NoControl;
+            label1.Location = new Point(428, 12);
+            label1.MinimumSize = new Size(323, 200);
+            label1.Name = "label1";
+            label1.Size = new Size(323, 200);
+            label1.TabIndex = 4;
+            // 
             // gameForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1178, 944);
+            Controls.Add(label1);
             Controls.Add(btnRestart);
             Controls.Add(btnMenu);
             Name = "gameForm";
@@ -64,11 +78,13 @@
             Text = "Connect 4";
             Load += gameForm_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnMenu;
         private Button btnRestart;
+        private Label label1;
     }
 }

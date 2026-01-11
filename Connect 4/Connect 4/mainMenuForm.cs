@@ -28,5 +28,10 @@ namespace Connect_4
         {
             Application.Exit();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
