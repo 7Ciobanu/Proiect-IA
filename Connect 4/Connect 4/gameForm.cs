@@ -33,14 +33,20 @@ namespace Connect_4
         public gameForm()
         {
             InitializeComponent();
+            this.FormClosing += GameForm_FormClosing;
             maxDepth = GameSettings.SearchDepth;
             mm = new Minimax(ROWS, COLS, maxDepth);
             InitializeBoard();
         }
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
 
         private void gameForm_Load(object sender, EventArgs e)
         {
-           
+
         }
         private void InitializeBoard()
         {
@@ -84,7 +90,7 @@ namespace Connect_4
             playerSound.Play();
             DrawBoard();
 
-            if (mm.CheckWin(1,board))
+            if (mm.CheckWin(1, board))
             {
                 gameOver = true;
                 gameWinSound.Play();
@@ -93,7 +99,7 @@ namespace Connect_4
             }
 
             int bestCol = mm.GetBestMove(board);
-            Random rnd=new Random();
+            Random rnd = new Random();
             int delay = rnd.Next(500, 1500);
             await Task.Delay(delay);
             mm.MakeMove(bestCol, 2, board); // 2 = AI
@@ -146,9 +152,18 @@ namespace Connect_4
             }
         }
 
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            gameOver = false;
+            board = new int[ROWS, COLS];
+            DrawBoard();
+        }
 
-
-
-
+        private void btnMenu_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            mainMenuForm menu = new mainMenuForm();
+            menu.Show();
+        }
     }
 }
