@@ -29,7 +29,7 @@ namespace Connect_4
 
         private void gameForm_Load(object sender, EventArgs e)
         {
-
+            //hallo
         }
         private void InitializeBoard()
         {
