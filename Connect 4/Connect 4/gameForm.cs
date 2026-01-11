@@ -110,7 +110,7 @@ namespace Connect_4
             {
                 gameOver = true;
                 gameOverSound.Play();
-                MessageBox.Show("Calculatorul a castigat!");
+                MessageBox.Show("Ai pierdut!");
             }
 
         }
