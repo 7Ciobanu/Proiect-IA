@@ -33,7 +33,6 @@ namespace Connect_4
         SoundPlayer gameOverSound = new SoundPlayer(@"Sounds\game_over.wav");
         SoundPlayer gameWinSound = new SoundPlayer(@"Sounds\game_win.wav");
 
-
         public gameForm()
         {
             InitializeComponent();
@@ -45,12 +44,6 @@ namespace Connect_4
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-        }
-
-
-        private void gameForm_Load(object sender, EventArgs e)
-        {
-
         }
         private void InitializeBoard()
         {

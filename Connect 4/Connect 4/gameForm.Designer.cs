@@ -76,7 +76,6 @@
             Name = "gameForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Connect 4";
-            Load += gameForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

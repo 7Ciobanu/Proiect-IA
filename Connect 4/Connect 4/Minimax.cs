@@ -71,6 +71,11 @@ namespace Connect_4
             return moves;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public int GetBestMove(int[,] board)
         {
             int bestScore = int.MinValue;
@@ -90,7 +95,15 @@ namespace Connect_4
             }
             return bestCol;
         }
-
+        /// <summary>
+        /// algoritmul minimax cu retezarea alfa-beta
+        /// </summary>
+        /// <param name="depth"></param>
+        /// <param name="alpha"></param>
+        /// <param name="beta"></param>
+        /// <param name="maximizing"></param>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public int MiniMax(int depth, int alpha, int beta, bool maximizing, int[,] board)
         {
             if (depth == 0 || CheckWin(2,board) || CheckWin(1,board) || GetValidMoves(board).Count == 0)
@@ -129,6 +142,11 @@ namespace Connect_4
                 return minEval;
             }
         }
+        /// <summary>
+        /// evalueaza tabla de joc, tinand cont de numarul si de lungimea liniilor per player
+        /// </summary>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public int EvaluateBoard(int[,] board)
         {
             if (CheckWin(2,board)) return 100000;
@@ -142,30 +160,47 @@ namespace Connect_4
 
             return score;
         }
-
+        /// <summary>
+        /// numara cate linii de lungime *count* are player ul *player* in toate directiile
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="count"></param>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public int CountPatterns(int player, int count, int[,] board)
         {
             int patterns = 0;
-
+            //orizontala 
             for (int r = 0; r < ROWS; r++)
                 for (int c = 0; c < COLS - 3; c++)
                     patterns += CheckLine(player, count, r, c, 0, 1, board);
-
+            //verticala
             for (int r = 0; r < ROWS - 3; r++)
                 for (int c = 0; c < COLS; c++)
                     patterns += CheckLine(player, count, r, c, 1, 0, board);
-
+            //diag princ \
             for (int r = 0; r < ROWS - 3; r++)
                 for (int c = 0; c < COLS - 3; c++)
                     patterns += CheckLine(player, count, r, c, 1, 1, board);
-
+            //diag sec /
             for (int r = 3; r < ROWS; r++)
                 for (int c = 0; c < COLS - 3; c++)
                     patterns += CheckLine(player, count, r, c, -1, 1, board);
 
             return patterns;
         }
-
+        /// <summary>
+        /// numara cate linii de lungime *count* are player ul *player* pe o anumita directie,
+        /// in functie de dr(directie rand) si dc(directie coloana)
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="count"></param>
+        /// <param name="r"></param>
+        /// <param name="c"></param>
+        /// <param name="dr"></param>
+        /// <param name="dc"></param>
+        /// <param name="board"></param>
+        /// <returns></returns>
         public int CheckLine(int player, int count, int r, int c, int dr, int dc, int[,] board)
         {
             int playerCount = 0;
