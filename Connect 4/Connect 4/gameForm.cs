@@ -14,7 +14,7 @@ namespace Connect_4
     {
         private const int ROWS = 6;
         private const int COLS = 7;
-
+        private Minimax mm;
         private int maxDepth;
 
         private bool gameOver = false;
@@ -27,12 +27,12 @@ namespace Connect_4
         {
             InitializeComponent();
             maxDepth = GameSettings.SearchDepth;
+            mm = new Minimax(ROWS, COLS, maxDepth);
             InitializeBoard();
         }
 
         private void gameForm_Load(object sender, EventArgs e)
         {
-            //hallo
         }
         private void InitializeBoard()
         {
@@ -75,18 +75,18 @@ namespace Connect_4
             }
             DrawBoard();
 
-            if (CheckWin(1))
+            if (mm.CheckWin(1,board))
             {
                 gameOver = true;
                 MessageBox.Show("Ai castigat!");
                 return;
             }
 
-            int bestCol = GetBestMove();
-            MakeMove(bestCol, 2); // 2 = AI
+            int bestCol = mm.GetBestMove(board);
+            mm.MakeMove(bestCol, 2, board); // 2 = AI
             DrawBoard();
 
-            if (CheckWin(2))
+            if (mm.CheckWin(2, board))
             {
                 gameOver = true;
                 MessageBox.Show("Calculatorul a castigat!");
@@ -130,171 +130,8 @@ namespace Connect_4
                 }
             }
         }
-        private bool CheckWin(int player)
-        {
-            // orizontal
-            for (int r = 0; r < ROWS; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r, c + i] == player))
-                        return true;
 
-            // vertical
-            for (int r = 0; r < ROWS - 3; r++)
-                for (int c = 0; c < COLS; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r + i, c] == player))
-                        return true;
 
-            // diagonala \
-            for (int r = 0; r < ROWS - 3; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r + i, c + i] == player))
-                        return true;
-
-            // diagonala /
-            for (int r = 3; r < ROWS; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r - i, c + i] == player))
-                        return true;
-
-            return false;
-        }
-
-        private void MakeMove(int col, int player)
-        {
-            for (int r = ROWS - 1; r >= 0; r--)
-                if (board[r, col] == 0)
-                {
-                    board[r, col] = player;
-                    break;
-                }
-        }
-        private void UndoMove(int col)
-        {
-            for (int r = 0; r < ROWS; r++)
-                if (board[r, col] != 0)
-                {
-                    board[r, col] = 0;
-                    break;
-                }
-        }
-        private List<int> GetValidMoves()
-        {
-            List<int> moves = new List<int>();
-            for (int c = 0; c < COLS; c++)
-                if (board[0, c] == 0)
-                    moves.Add(c);
-            return moves;
-        }
-
-        private int GetBestMove()
-        {
-            int bestScore = int.MinValue;
-            int bestCol = 0;
-
-            foreach (int col in GetValidMoves())
-            {
-                MakeMove(col, 2);
-                int score = Minimax(maxDepth - 1, int.MinValue, int.MaxValue, false);
-                UndoMove(col);
-
-                if (score > bestScore)
-                {
-                    bestScore = score;
-                    bestCol = col;
-                }
-            }
-            return bestCol;
-        }
-
-        private int Minimax(int depth, int alpha, int beta, bool maximizing)
-        {
-            if (depth == 0 || CheckWin(2) || CheckWin(1) || GetValidMoves().Count == 0)
-                return EvaluateBoard();
-
-            if (maximizing)
-            {
-                int maxEval = int.MinValue;
-                foreach (int col in GetValidMoves())
-                {
-                    MakeMove(col, 2);
-                    int eval = Minimax(depth - 1, alpha, beta, false);
-                    UndoMove(col);
-
-                    maxEval = Math.Max(maxEval, eval);
-                    alpha = Math.Max(alpha, eval);
-                    if (beta <= alpha)
-                        break; // retezare alpha-beta
-                }
-                return maxEval;
-            }
-            else
-            {
-                int minEval = int.MaxValue;
-                foreach (int col in GetValidMoves())
-                {
-                    MakeMove(col, 1);
-                    int eval = Minimax(depth - 1, alpha, beta, true);
-                    UndoMove(col);
-
-                    minEval = Math.Min(minEval, eval);
-                    beta = Math.Min(beta, eval);
-                    if (beta <= alpha)
-                        break;
-                }
-                return minEval;
-            }
-        }
-        private int EvaluateBoard()
-        {
-            if (CheckWin(2)) return 100000;
-            if (CheckWin(1)) return -100000;
-
-            int score = 0;
-            score += CountPatterns(2, 3) * 100;
-            score += CountPatterns(2, 2) * 10;
-            score -= CountPatterns(1, 3) * 100;
-            score -= CountPatterns(1, 2) * 10;
-
-            return score;
-        }
-
-        private int CountPatterns(int player, int count)
-        {
-            int patterns = 0;
-
-            for (int r = 0; r < ROWS; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    patterns += CheckLine(player, count, r, c, 0, 1);
-
-            for (int r = 0; r < ROWS - 3; r++)
-                for (int c = 0; c < COLS; c++)
-                    patterns += CheckLine(player, count, r, c, 1, 0);
-
-            for (int r = 0; r < ROWS - 3; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    patterns += CheckLine(player, count, r, c, 1, 1);
-
-            for (int r = 3; r < ROWS; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    patterns += CheckLine(player, count, r, c, -1, 1);
-
-            return patterns;
-        }
-
-        private int CheckLine(int player, int count, int r, int c, int dr, int dc)
-        {
-            int playerCount = 0;
-            int emptyCount = 0;
-
-            for (int i = 0; i < 4; i++)
-            {
-                int cell = board[r + dr * i, c + dc * i];
-                if (cell == player) playerCount++;
-                else if (cell == 0) emptyCount++;
-            }
-
-            return (playerCount == count && emptyCount == 4 - count) ? 1 : 0;
-        }
 
 
 
