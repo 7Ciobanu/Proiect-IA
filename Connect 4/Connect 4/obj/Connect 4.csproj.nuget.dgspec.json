@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\Connect 4.csproj": {}
+    "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\Connect 4.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\Connect 4.csproj": {
+    "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\Connect 4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\Connect 4.csproj",
+        "projectUniqueName": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\Connect 4.csproj",
         "projectName": "Connect 4",
-        "projectPath": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\Connect 4.csproj",
-        "packagesPath": "C:\\Users\\Andrei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\obj\\",
+        "projectPath": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\Connect 4.csproj",
+        "packagesPath": "C:\\Users\\Paladi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Paladi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,7 +40,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "10.0.100"
       },
       "frameworks": {
         "net8.0-windows7.0": {
@@ -64,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

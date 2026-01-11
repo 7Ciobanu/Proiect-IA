@@ -15,8 +15,11 @@ namespace Connect_4
         private const int ROWS = 6;
         private const int COLS = 7;
 
+        private bool gameOver = false;
+
         private int[,] board = new int[ROWS, COLS];
         private Button[] columnButtons = new Button[COLS];
+
 
         public gameForm()
         {
@@ -58,7 +61,8 @@ namespace Connect_4
             Button btn = sender as Button;
             int col = (int)btn.Tag;
 
-            
+            if (gameOver) return;
+
             for (int r = ROWS - 1; r >= 0; r--)
             {
                 if (board[r, col] == 0)
@@ -67,8 +71,23 @@ namespace Connect_4
                     break;
                 }
             }
-
             DrawBoard();
+
+            if (CheckWin(1))
+            {
+                gameOver = true;
+                MessageBox.Show("Ai castigat!");
+                return;
+            }
+
+            AIMoveRandom();
+            DrawBoard();
+
+            if (CheckWin(2))
+            {
+                gameOver = true;
+                MessageBox.Show("Calculatorul a castigat!");
+            }
 
             // TODO: aici vom apela AI-ul
         }
@@ -108,6 +127,54 @@ namespace Connect_4
                     g.DrawEllipse(Pens.Black, x, y, circleSize, circleSize);
                 }
             }
+        }
+        private bool CheckWin(int player)
+        {
+            // orizontal
+            for (int r = 0; r < ROWS; r++)
+                for (int c = 0; c < COLS - 3; c++)
+                    if (Enumerable.Range(0, 4).All(i => board[r, c + i] == player))
+                        return true;
+
+            // vertical
+            for (int r = 0; r < ROWS - 3; r++)
+                for (int c = 0; c < COLS; c++)
+                    if (Enumerable.Range(0, 4).All(i => board[r + i, c] == player))
+                        return true;
+
+            // diagonala \
+            for (int r = 0; r < ROWS - 3; r++)
+                for (int c = 0; c < COLS - 3; c++)
+                    if (Enumerable.Range(0, 4).All(i => board[r + i, c + i] == player))
+                        return true;
+
+            // diagonala /
+            for (int r = 3; r < ROWS; r++)
+                for (int c = 0; c < COLS - 3; c++)
+                    if (Enumerable.Range(0, 4).All(i => board[r - i, c + i] == player))
+                        return true;
+
+            return false;
+        }
+        private void AIMoveRandom()
+        {
+            Random rnd = new Random();
+            List<int> validCols = new List<int>();
+
+            for (int c = 0; c < COLS; c++)
+                if (board[0, c] == 0)
+                    validCols.Add(c);
+
+            if (validCols.Count == 0) return;
+
+            int col = validCols[rnd.Next(validCols.Count)];
+
+            for (int r = ROWS - 1; r >= 0; r--)
+                if (board[r, col] == 0)
+                {
+                    board[r, col] = 2;
+                    break;
+                }
         }
 
 

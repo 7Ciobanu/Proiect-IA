@@ -1,26 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\",
+  "WorkspaceRootPath": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|c:\\users\\andrei\\desktop\\bnl\\connect 4\\connect 4\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|c:\\users\\paladi\\desktop\\ia\\proiect-ia\\connect 4\\connect 4\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|solutionrelative:connect 4\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|c:\\users\\andrei\\desktop\\bnl\\connect 4\\connect 4\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|solutionrelative:connect 4\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\connect 4\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\connect 4\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|solutionrelative:connect 4\\gameform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|c:\\users\\andrei\\desktop\\bnl\\connect 4\\connect 4\\mainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|solutionrelative:connect 4\\mainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|c:\\users\\andrei\\desktop\\bnl\\connect 4\\connect 4\\mainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C31058A8-98D1-4730-945D-A891563C375D}|Connect 4\\Connect 4.csproj|solutionrelative:connect 4\\mainmenuform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,77 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "gameForm.cs",
-              "DocumentMoniker": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\gameForm.cs",
+              "DocumentMoniker": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\gameForm.cs",
               "RelativeDocumentMoniker": "Connect 4\\gameForm.cs",
-              "ToolTip": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\gameForm.cs",
+              "ToolTip": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\gameForm.cs",
               "RelativeToolTip": "Connect 4\\gameForm.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAGIAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAUwKcAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-11T12:34:11.763Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "gameForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\gameForm.cs",
+              "DocumentMoniker": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\gameForm.cs",
               "RelativeDocumentMoniker": "Connect 4\\gameForm.cs",
-              "ToolTip": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\gameForm.cs [Design]",
+              "ToolTip": "C:\\Users\\Paladi\\Desktop\\ia\\Proiect-IA\\Connect 4\\Connect 4\\gameForm.cs [Design]",
               "RelativeToolTip": "Connect 4\\gameForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-11T11:36:14.526Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "settingsForm.cs",
-              "DocumentMoniker": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\settingsForm.cs",
-              "RelativeDocumentMoniker": "Connect 4\\settingsForm.cs",
-              "ToolTip": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\settingsForm.cs",
-              "RelativeToolTip": "Connect 4\\settingsForm.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAlwBMAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T11:57:40.423Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "mainMenuForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\mainMenuForm.cs",
-              "RelativeDocumentMoniker": "Connect 4\\mainMenuForm.cs",
-              "ToolTip": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\mainMenuForm.cs [Design]",
-              "RelativeToolTip": "Connect 4\\mainMenuForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T11:40:06.422Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "mainMenuForm.cs",
-              "DocumentMoniker": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\mainMenuForm.cs",
-              "RelativeDocumentMoniker": "Connect 4\\mainMenuForm.cs",
-              "ToolTip": "C:\\Users\\Andrei\\Desktop\\bnl\\Connect 4\\Connect 4\\mainMenuForm.cs",
-              "RelativeToolTip": "Connect 4\\mainMenuForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T10:58:29.62Z"
             }
           ]
         }
