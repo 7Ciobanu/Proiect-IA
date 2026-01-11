@@ -34,7 +34,7 @@ namespace Connect_4
         private void InitializeBoard()
         {
             int buttonWidth = 75;
-            int buttonHeight = 30;
+            int buttonHeight = 45;
             int spacing = 80;
 
             int totalWidth = COLS * spacing;
