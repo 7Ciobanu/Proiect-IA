@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Threading;
 
 namespace Connect_4
 {
@@ -15,18 +16,25 @@ namespace Connect_4
     {
         private const int ROWS = 6;
         private const int COLS = 7;
+        private Minimax mm;
+        private int maxDepth;
 
         private bool gameOver = false;
 
         private int[,] board = new int[ROWS, COLS];
         private Button[] columnButtons = new Button[COLS];
 
-
+        SoundPlayer calculatorSound = new SoundPlayer(@"Sounds\calculator_sound.wav");
+        SoundPlayer playerSound = new SoundPlayer(@"Sounds\player_sound.wav");
+        SoundPlayer gameOverSound = new SoundPlayer(@"Sounds\game_over.wav");
+        SoundPlayer gameWinSound = new SoundPlayer(@"Sounds\game_win.wav");
 
 
         public gameForm()
         {
             InitializeComponent();
+            maxDepth = GameSettings.SearchDepth;
+            mm = new Minimax(ROWS, COLS, maxDepth);
             InitializeBoard();
         }
 
@@ -58,9 +66,8 @@ namespace Connect_4
             }
         }
 
-        private void ColumnButton_Click(object sender, EventArgs e)
+        private async void ColumnButton_Click(object sender, EventArgs e)
         {
-            coinSound.Play();
             Button btn = sender as Button;
             int col = (int)btn.Tag;
 
@@ -74,25 +81,32 @@ namespace Connect_4
                     break;
                 }
             }
+            playerSound.Play();
             DrawBoard();
 
-            if (CheckWin(1))
+            if (mm.CheckWin(1,board))
             {
                 gameOver = true;
+                gameWinSound.Play();
                 MessageBox.Show("Ai castigat!");
                 return;
             }
 
-            AIMoveRandom();
+            int bestCol = mm.GetBestMove(board);
+            Random rnd=new Random();
+            int delay = rnd.Next(500, 1500);
+            await Task.Delay(delay);
+            mm.MakeMove(bestCol, 2, board); // 2 = AI
+            calculatorSound.Play();
             DrawBoard();
 
-            if (CheckWin(2))
+            if (mm.CheckWin(2, board))
             {
                 gameOver = true;
+                gameOverSound.Play();
                 MessageBox.Show("Calculatorul a castigat!");
             }
 
-            // TODO: aici vom apela AI-ul
         }
         private void DrawBoard()
         {
@@ -131,54 +145,9 @@ namespace Connect_4
                 }
             }
         }
-        private bool CheckWin(int player)
-        {
-            // orizontal
-            for (int r = 0; r < ROWS; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r, c + i] == player))
-                        return true;
 
-            // vertical
-            for (int r = 0; r < ROWS - 3; r++)
-                for (int c = 0; c < COLS; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r + i, c] == player))
-                        return true;
 
-            // diagonala \
-            for (int r = 0; r < ROWS - 3; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r + i, c + i] == player))
-                        return true;
 
-            // diagonala /
-            for (int r = 3; r < ROWS; r++)
-                for (int c = 0; c < COLS - 3; c++)
-                    if (Enumerable.Range(0, 4).All(i => board[r - i, c + i] == player))
-                        return true;
-
-            return false;
-        }
-        private void AIMoveRandom()
-        {
-            Random rnd = new Random();
-            List<int> validCols = new List<int>();
-
-            for (int c = 0; c < COLS; c++)
-                if (board[0, c] == 0)
-                    validCols.Add(c);
-
-            if (validCols.Count == 0) return;
-
-            int col = validCols[rnd.Next(validCols.Count)];
-
-            for (int r = ROWS - 1; r >= 0; r--)
-                if (board[r, col] == 0)
-                {
-                    board[r, col] = 2;
-                    break;
-                }
-        }
 
 
     }
