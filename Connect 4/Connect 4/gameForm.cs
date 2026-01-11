@@ -33,13 +33,13 @@ namespace Connect_4
         }
         private void InitializeBoard()
         {
-            int buttonWidth = 50;
+            int buttonWidth = 75;
             int buttonHeight = 30;
-            int spacing = 55;
+            int spacing = 80;
 
             int totalWidth = COLS * spacing;
             int startX = (this.ClientSize.Width - totalWidth) / 2;
-            int startY = 50; 
+            int startY = 350;
 
             for (int c = 0; c < COLS; c++)
             {
@@ -48,8 +48,7 @@ namespace Connect_4
                 btn.Height = buttonHeight;
                 btn.Left = startX + c * spacing;
                 btn.Top = startY;
-                btn.Text = (c + 1).ToString();
-                btn.Tag = c; 
+                btn.Tag = c;
                 btn.Click += ColumnButton_Click;
                 this.Controls.Add(btn);
                 columnButtons[c] = btn;
@@ -101,12 +100,12 @@ namespace Connect_4
             base.OnPaint(e);
             Graphics g = e.Graphics;
 
-            int circleSize = 50;
-            int spacing = 55;
+            int circleSize = 75;
+            int spacing = 80;
 
             int totalWidth = COLS * spacing;
             int startX = (this.ClientSize.Width - totalWidth) / 2;
-            int startY = 100; 
+            int startY = 400;
 
             for (int r = 0; r < ROWS; r++)
             {
