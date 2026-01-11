@@ -32,9 +32,10 @@
             // 
             // gameForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1178, 944);
+            ClientSize = new Size(1184, 961);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "gameForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Connect 4";
