@@ -15,6 +15,8 @@ namespace Connect_4
         private const int ROWS = 6;
         private const int COLS = 7;
 
+        private int maxDepth;
+
         private bool gameOver = false;
 
         private int[,] board = new int[ROWS, COLS];
@@ -24,6 +26,7 @@ namespace Connect_4
         public gameForm()
         {
             InitializeComponent();
+            maxDepth = GameSettings.SearchDepth;
             InitializeBoard();
         }
 
@@ -79,7 +82,8 @@ namespace Connect_4
                 return;
             }
 
-            AIMoveRandom();
+            int bestCol = GetBestMove();
+            MakeMove(bestCol, 2); // 2 = AI
             DrawBoard();
 
             if (CheckWin(2))
@@ -88,7 +92,6 @@ namespace Connect_4
                 MessageBox.Show("Calculatorul a castigat!");
             }
 
-            // TODO: aici vom apela AI-ul
         }
         private void DrawBoard()
         {
@@ -155,26 +158,144 @@ namespace Connect_4
 
             return false;
         }
-        private void AIMoveRandom()
+
+        private void MakeMove(int col, int player)
         {
-            Random rnd = new Random();
-            List<int> validCols = new List<int>();
-
-            for (int c = 0; c < COLS; c++)
-                if (board[0, c] == 0)
-                    validCols.Add(c);
-
-            if (validCols.Count == 0) return;
-
-            int col = validCols[rnd.Next(validCols.Count)];
-
             for (int r = ROWS - 1; r >= 0; r--)
                 if (board[r, col] == 0)
                 {
-                    board[r, col] = 2;
+                    board[r, col] = player;
                     break;
                 }
         }
+        private void UndoMove(int col)
+        {
+            for (int r = 0; r < ROWS; r++)
+                if (board[r, col] != 0)
+                {
+                    board[r, col] = 0;
+                    break;
+                }
+        }
+        private List<int> GetValidMoves()
+        {
+            List<int> moves = new List<int>();
+            for (int c = 0; c < COLS; c++)
+                if (board[0, c] == 0)
+                    moves.Add(c);
+            return moves;
+        }
+
+        private int GetBestMove()
+        {
+            int bestScore = int.MinValue;
+            int bestCol = 0;
+
+            foreach (int col in GetValidMoves())
+            {
+                MakeMove(col, 2);
+                int score = Minimax(maxDepth - 1, int.MinValue, int.MaxValue, false);
+                UndoMove(col);
+
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestCol = col;
+                }
+            }
+            return bestCol;
+        }
+
+        private int Minimax(int depth, int alpha, int beta, bool maximizing)
+        {
+            if (depth == 0 || CheckWin(2) || CheckWin(1) || GetValidMoves().Count == 0)
+                return EvaluateBoard();
+
+            if (maximizing)
+            {
+                int maxEval = int.MinValue;
+                foreach (int col in GetValidMoves())
+                {
+                    MakeMove(col, 2);
+                    int eval = Minimax(depth - 1, alpha, beta, false);
+                    UndoMove(col);
+
+                    maxEval = Math.Max(maxEval, eval);
+                    alpha = Math.Max(alpha, eval);
+                    if (beta <= alpha)
+                        break; // retezare alpha-beta
+                }
+                return maxEval;
+            }
+            else
+            {
+                int minEval = int.MaxValue;
+                foreach (int col in GetValidMoves())
+                {
+                    MakeMove(col, 1);
+                    int eval = Minimax(depth - 1, alpha, beta, true);
+                    UndoMove(col);
+
+                    minEval = Math.Min(minEval, eval);
+                    beta = Math.Min(beta, eval);
+                    if (beta <= alpha)
+                        break;
+                }
+                return minEval;
+            }
+        }
+        private int EvaluateBoard()
+        {
+            if (CheckWin(2)) return 100000;
+            if (CheckWin(1)) return -100000;
+
+            int score = 0;
+            score += CountPatterns(2, 3) * 100;
+            score += CountPatterns(2, 2) * 10;
+            score -= CountPatterns(1, 3) * 100;
+            score -= CountPatterns(1, 2) * 10;
+
+            return score;
+        }
+
+        private int CountPatterns(int player, int count)
+        {
+            int patterns = 0;
+
+            for (int r = 0; r < ROWS; r++)
+                for (int c = 0; c < COLS - 3; c++)
+                    patterns += CheckLine(player, count, r, c, 0, 1);
+
+            for (int r = 0; r < ROWS - 3; r++)
+                for (int c = 0; c < COLS; c++)
+                    patterns += CheckLine(player, count, r, c, 1, 0);
+
+            for (int r = 0; r < ROWS - 3; r++)
+                for (int c = 0; c < COLS - 3; c++)
+                    patterns += CheckLine(player, count, r, c, 1, 1);
+
+            for (int r = 3; r < ROWS; r++)
+                for (int c = 0; c < COLS - 3; c++)
+                    patterns += CheckLine(player, count, r, c, -1, 1);
+
+            return patterns;
+        }
+
+        private int CheckLine(int player, int count, int r, int c, int dr, int dc)
+        {
+            int playerCount = 0;
+            int emptyCount = 0;
+
+            for (int i = 0; i < 4; i++)
+            {
+                int cell = board[r + dr * i, c + dc * i];
+                if (cell == player) playerCount++;
+                else if (cell == 0) emptyCount++;
+            }
+
+            return (playerCount == count && emptyCount == 4 - count) ? 1 : 0;
+        }
+
 
 
     }
